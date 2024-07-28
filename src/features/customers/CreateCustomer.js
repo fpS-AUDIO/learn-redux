@@ -1,10 +1,24 @@
 import { useState } from "react";
 
+// remember to import the `useDispatch` Hook
+import { useDispatch } from "react-redux";
+// import action creator (helper function) too
+import { createCustomer } from "./customerSlice";
+
 function Customer() {
   const [fullName, setFullName] = useState("");
   const [nationalId, setNationalId] = useState("");
 
-  function handleClick() {}
+  // useDispatch returns dispatch funcion
+  const dispatch = useDispatch();
+
+  function handleClick() {
+    if (!fullName || !nationalId) return;
+    // use disptach in standard way
+    dispatch(createCustomer(fullName, nationalId));
+    setFullName("");
+    setNationalId("");
+  }
 
   return (
     <div>
